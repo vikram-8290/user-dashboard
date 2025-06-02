@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom"
+import { Layout, ConfigProvider } from "antd"
+import Sidebar from "./components/Sidebar"
+import Header from "./components/Header"
+import Dashboard from "./pages/Dashboard"
+import B2B from "./pages/B2b"
+
+const { Content } = Layout
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#7879F1", 
+        },
+      }}
+    >
+      <Layout className="min-h-screen">
+        <Sidebar />
+        <Layout>
+          <Header />
+          <Content className="bg-gray-50">
+            <div className="p-6">
+              <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/" element={<B2B />} />
+              </Routes>
+            </div>
+          </Content>
+        </Layout>
+      </Layout>
+    </ConfigProvider>
+  )
 }
 
-export default App;
+export default App
